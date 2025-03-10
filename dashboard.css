@@ -17,7 +17,7 @@ body {
   display: flex;
   min-height: 100vh;
   background-color: var(--bg-secondary);
-  border-radius: 32px;
+  border-radius: 33px;
   overflow: hidden;
 }
 
