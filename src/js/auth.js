@@ -2,7 +2,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebas
 import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js";
 import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-firestore.js";
 
-// Configuração do Firebase
+// 🔥 Configuração do Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyB8b5OuCb8S-e9SklFV8jmWgx1Cpz2_9Lk",
   authDomain: "main-47b3b.firebaseapp.com",
@@ -15,7 +15,7 @@ const firebaseConfig = {
 // Inicializar Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
-const db = getFirestore(app)
+const db = getFirestore(app);
 
 document.addEventListener("DOMContentLoaded", function () {
   const submitButton = document.getElementById("submitSignUp");
@@ -24,16 +24,16 @@ document.addEventListener("DOMContentLoaded", function () {
     submitButton.addEventListener("click", function (event) {
       event.preventDefault();
 
-      // Obter os valores do formulário
+      // 📝 Obter os valores do formulário
       const name = document.getElementById("fName").value.trim();
       const email = document.getElementById("rEmail").value.trim();
       const password = document.getElementById("rPassword").value;
 
-      // Elementos da UI
+      // 🎨 Elementos da UI
       const progressBarFill = document.querySelector(".progress-bar-fill");
       const notificationContainer = document.getElementById("notification-container");
 
-      // Função para exibir notificações animadas
+      // 🔔 Função para exibir notificações animadas
       function showNotification(message, type = "success") {
         const icons = {
           success: "✅",
@@ -50,25 +50,25 @@ document.addEventListener("DOMContentLoaded", function () {
 
         notificationContainer.appendChild(notification);
 
-        // Remover após 4 segundos
+        // ⏳ Remover após 4 segundos
         setTimeout(() => {
           notification.style.animation = "fadeOut 0.4s ease-in-out forwards";
           setTimeout(() => notification.remove(), 400);
         }, 4000);
       }
 
-      // Função para atualizar a barra de progresso
+      // 📊 Função para atualizar a barra de progresso
       function updateProgressBar(value) {
         progressBarFill.style.width = value + "%";
       }
 
-      // Validação inicial
+      // ✅ Validação inicial
       if (!name || !email || !password) {
         showNotification("⚠️ Preencha todos os campos!", "warning");
         return;
       }
 
-      // Iniciar a barra de progresso
+      // 🚀 Iniciar a barra de progresso
       updateProgressBar(20);
       showNotification("🔄 Validando informações...");
 
@@ -76,16 +76,28 @@ document.addEventListener("DOMContentLoaded", function () {
         updateProgressBar(40);
         showNotification("🛠️ Criando conta...");
 
-        // Criar usuário no Firebase Authentication
+        // 🔐 Criar usuário no Firebase Authentication
         createUserWithEmailAndPassword(auth, email, password)
-          .then((userCredential) => {
+          .then(async (userCredential) => {
             const user = userCredential.user;
             updateProgressBar(80);
-            showNotification(`✅ Conta criada com sucesso! Bem-vindo, ${name}`);
+            showNotification(`✅ Conta criada com sucesso!`);
 
+            // 🔥 Salvar dados do usuário no Firestore
+            await setDoc(doc(db, "users", user.uid), {
+              name: name,
+              email: email,
+              createdAt: new Date()
+            });
+
+            // 🕐 Aguardar 2 segundos antes de redirecionar
             setTimeout(() => {
               updateProgressBar(100);
-              setTimeout(() => updateProgressBar(0), 2000); // Resetar barra após sucesso
+
+              setTimeout(() => {
+                updateProgressBar(0); // Resetar barra após sucesso
+                window.location.href = "./loginpage.html"; // 🔄 Redirecionar para a página de login
+              }, 2000);
             }, 1000);
 
             console.log("Usuário criado:", user);
