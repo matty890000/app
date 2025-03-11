@@ -14,24 +14,13 @@
 
     <div class="signup-content">
       <div class="signup-text">
-        <h2 class="signup-title">Inscrever-se</h2>
+        <h2 class="signup-title">Entrar</h2>
         <p class="signup-description">
-          Inscreva-se para Encontrar o seu Espaço Favorito.
+        Por favor, faça login para continuar em sua conta.
         </p>
       </div>
 
       <form class="signup-form" action="#" method="POST">
-        <div class="form-field">
-          <input
-            type="text"
-            id="fName"
-            class="form-input"
-            placeholder="Seu Nome Completo"
-            required
-          />
-          <label for="fName" class="form-label">Seu Nome</label>
-        </div>
-
         
 
         <div class="form-field form-field--active">
@@ -39,7 +28,7 @@
             type="email"
             id="rEmail"
             class="form-input"
-            placeholder="Digite seu E-mail"
+            placeholder="Digite o seu Email"
             required
           />
           <label for="rEmail" class="form-label">E-mail</label>
@@ -50,7 +39,7 @@
             type="password"
             id="rPassword"
             class="form-input"
-            placeholder="Crie uma Senha segura"
+            placeholder="Digite a sua Senha"
             required
           />
           <img
@@ -72,12 +61,12 @@
         </div>
 
         <button type="button" class="button button--google">
-          <span>Continuar com o Google</span> <img src="src/img/Group.svg" alt="">
+          <span>Continuar com o Google </span> <img src="src/img/Group.svg" alt="">
           <div class="google-icon"></div>
         </button>
 
         <p class="login-link">
-          Já tem uma conta? <a href="./loginpage.html" class="text-purple">Entre</a>
+        Precisa de uma conta? <a href="signup.html" class="text-purple">Crie uma</a>
         </p>
       </form>
     </div>
@@ -92,7 +81,7 @@
   </section>
 </main>
 
-<script type="module" src="./src/js/auth.js"></script>
+<script type="module" src="./src/js/login.js"></script>
 
 <div id="progress-bar" class="progress-bar">
   <div class="progress-bar-fill"></div>
@@ -101,7 +90,6 @@
 <div id="notification-container"></div>
 
 <link rel="stylesheet" href="./src/css/notifications.css">
-
 
 </body>
 </html>
