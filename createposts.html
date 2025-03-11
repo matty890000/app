@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Post</title>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1>Criar Novo Post</h1>
+    <button id="openModalBtn">+ Novo Post</button>
+
+    <!-- Modal para Criar Post -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span id="closeModal" class="close">&times;</span>
+            <h2>Adicionar Novo Post</h2>
+            <input type="text" id="title" placeholder="Título">
+            <textarea id="content" placeholder="Conteúdo do Post"></textarea>
+            <input type="text" id="imageUrl" placeholder="URL da Imagem">
+            <button id="savePostBtn">Publicar</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // 🔥 Configuração Firebase
+            const firebaseConfig = {
+                apiKey: "AIzaSyB8b5OuCb8S-e9SklFV8jmWgx1Cpz2_9Lk",
+                authDomain: "main-47b3b.firebaseapp.com",
+                databaseURL: "https://main-47b3b-default-rtdb.firebaseio.com/",
+                projectId: "main-47b3b",
+                storageBucket: "main-47b3b.appspot.com",
+                messagingSenderId: "741085244179",
+                appId: "1:741085244179:web:f93ee2558e569b23a108e6"
+            };
+
+            // 🔥 Inicializa Firebase
+            firebase.initializeApp(firebaseConfig);
+            const database = firebase.database();
+
+            // 🔥 Modal Lógica
+            const modal = document.getElementById("modal");
+            const openModalBtn = document.getElementById("openModalBtn");
+            const closeModal = document.getElementById("closeModal");
+
+            openModalBtn.addEventListener("click", function () {
+                modal.style.display = "block";
+            });
+
+            closeModal.addEventListener("click", function () {
+                modal.style.display = "none";
+            });
+
+            window.addEventListener("click", function (event) {
+                if (event.target === modal) {
+                    modal.style.display = "none";
+                }
+            });
+
+            // 🔥 Salvar Post no Firebase
+            document.getElementById("savePostBtn").addEventListener("click", function () {
+                const title = document.getElementById("title").value.trim();
+                const content = document.getElementById("content").value.trim();
+                const imageUrl = document.getElementById("imageUrl").value.trim();
+
+                if (title && content && imageUrl) {
+                    const newPostRef = database.ref("posts").push();
+                    newPostRef.set({
+                        title,
+                        content,
+                        imageUrl,
+                        timestamp: Date.now()
+                    });
+
+                    alert("Post publicado com sucesso!");
+                    modal.style.display = "none";
+
+                    // Limpar campos
+                    document.getElementById("title").value = "";
+                    document.getElementById("content").value = "";
+                    document.getElementById("imageUrl").value = "";
+                } else {
+                    alert("Preencha todos os campos!");
+                }
+            });
+        });
+    </script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            width: 30%;
+            margin: 10% auto;
+            border-radius: 10px;
+            text-align: left;
+            position: relative;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            display: block;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+
+</body>
+</html>

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="sidebar">
+        <img class="brand-name" src="./src/img/logo.svg">
+      
+        <div class="user-profile">
+          <img
+            src="https://cdn.builder.io/api/v1/image/assets/0756144abf4c427a975cdf344d2f5a60/a3be87eec39a39183434b751664c299a5b3781df33f36c89cdbf75c7de27711e?placeholderIfAbsent=true"
+            alt="User profile"
+            class="profile-image"
+          />
+          <div class="user-info">
+            <h2 class="user-name">Sérgio Gomes</h2>
+            <p class="user-handle">@sergiogomes</p>
+          </div>
+        </div>
+      
+        <ul class="nav-menu" role="menu">
+          <li role="menuitem">
+            <button class="nav-button nav-button-active" aria-current="page">
+              <img
+                src="https://cdn.builder.io/api/v1/image/assets/0756144abf4c427a975cdf344d2f5a60/6aede1ef65e1eaaee2ca79bc6994c3905c682aadbe98537947d2bee6f27f389b?placeholderIfAbsent=true"
+                alt=""
+                class="nav-icon"
+              />
+              <span>Feed</span>
+            </button>
+          </li>
+          <li role="menuitem">
+            <button class="nav-button">
+              <img
+                src="https://cdn.builder.io/api/v1/image/assets/0756144abf4c427a975cdf344d2f5a60/591af32557d5619ab8bb1997a03766dfbee6923d6d5ea2c62dfd8ad3ec31a2ea?placeholderIfAbsent=true"
+                alt=""
+                class="nav-icon"
+              />
+              <span>Pesquisar</span>
+            </button>
+          </li>
+          <li role="menuitem">
+            <button class="nav-button">
+              <img
+                src="https://cdn.builder.io/api/v1/image/assets/0756144abf4c427a975cdf344d2f5a60/4d196117ccc95b081786d46fdaf740ff9700f60ffd68ee4c9bf64f010af02761?placeholderIfAbsent=true"
+                alt=""
+                class="nav-icon"
+              />
+              <span>Explorar</span>
+            </button>
+          </li>
+          <li role="menuitem">
+            <button class="nav-button">
+              <img
+                src="https://cdn.builder.io/api/v1/image/assets/0756144abf4c427a975cdf344d2f5a60/8cb47bd619107d240fba29e3d4ba8b91fb829d4015c1398ba4ec446bb325cb5d?placeholderIfAbsent=true"
+                alt=""
+                class="nav-icon"
+              />
+              <span>Mensagens</span>
+              <span class="notification-badge">2+</span>
+            </button>
+          </li>
+          <li role="menuitem">
+            <button class="nav-button">
+              <img
+                src="https://cdn.builder.io/api/v1/image/assets/0756144abf4c427a975cdf344d2f5a60/e3494e160e8887da2ac4274697b7a8afdd1af25d06045eae6826532dbf988fdc?placeholderIfAbsent=true"
+                alt=""
+                class="nav-icon"
+              />
+              <span>Criar</span>
+            </button>
+          </li>
+          <li role="menuitem">
+            <button class="nav-button">
+              <img
+                src="https://cdn.builder.io/api/v1/image/assets/0756144abf4c427a975cdf344d2f5a60/21a5da9ebd6a5a7898a37c6085b4d933b2e6a8c507b585e6898b8ff889fe15d0?placeholderIfAbsent=true"
+                alt=""
+                class="nav-icon"
+              />
+              <span>Definições</span>
+            </button>
+          </li>
+          <li role="menuitem">
+            <button class="nav-button">
+              <img
+                src="https://cdn.builder.io/api/v1/image/assets/0756144abf4c427a975cdf344d2f5a60/9d35d736fc40fcd5c5cfaf39f42219e45e80db176182a2e2ba9656cb64af6798?placeholderIfAbsent=true"
+                alt=""
+                class="nav-icon"
+              />
+              <span>Logout</span>
+            </button>
+          </li>
+        </ul>
+      </nav>
+      
+      <main class="main-content">
+        <div class="content-wrapper">
+          <section class="feed-section">
+            <header class="feed-header">
+              <h2 class="section-title">Home Feed</h2>
+              <div class="header-actions">
+                <div class="search-bar">
+                  <img
+                    src="https://cdn.builder.io/api/v1/image/assets/0756144abf4c427a975cdf344d2f5a60/1f109ec8f067b5d599b3b97feff0b1a6eaa5e3a5e89daa1d06ef7a2008d9d03c?placeholderIfAbsent=true"
+                    alt=""
+                    class="search-icon"
+                  />
+                  <input type="search" placeholder="Pesquisar" aria-label="Search" />
+                </div>
+                <button class="filter-button">
+                  <img
+                    src="https://cdn.builder.io/api/v1/image/assets/0756144abf4c427a975cdf344d2f5a60/5865ae86753cad95b760a69771d029b6478fbd211dba38c46308eca9a621868f?placeholderIfAbsent=true"
+                    alt="Filter"
+                  />
+                </button>
+              </div>
+            </header>
+      
+            <article class="post-card">
+              <header class="post-header">
+                <div class="post-author">
+                  <img
+                    src="https://cdn.builder.io/api/v1/image/assets/0756144abf4c427a975cdf344d2f5a60/5dd17e98c930ce4eff7533aa42a72a8eaee207e1efed459dc1eedc786e625732?placeholderIfAbsent=true"
+                    alt=""
+                    class="author-image"
+                  />
+                  <div class="author-info">
+                    <h3 class="author-name">Espaço Lunar Mabor</h3>
+                    <p class="post-meta">Há 15 minutos • Cazenga, Mabor</p>
+                  </div>
+                </div>
+                <button class="more-options">
+                  <img
+                    src="https://cdn.builder.io/api/v1/image/assets/0756144abf4c427a975cdf344d2f5a60/6d5e4c11b1fe1ae04aab2376666fd57d1aeb2da8c6c7109c11dbb1b1a1adf750?placeholderIfAbsent=true"
+                    alt="More options"
+                  />
+                </button>
+              </header>
+      
+              <p class="post-content">
+                🎊 Nosso salão de festas é o espaço ideal para aniversários,
+                casamentos e eventos especiais. Reserve agora! 📞✨
+                <br /><br />
+                #FestaPerfeita #SalãoDeFestas #Eventos #Casamento #Aniversário
+              </p>
+      
+              <img
+                src="https://cdn.builder.io/api/v1/image/assets/0756144abf4c427a975cdf344d2f5a60/ccb355331678275fd8873f478f816737d5f96dda03b8a1c9eb8c5118c41b43c8?placeholderIfAbsent=true"
+                alt="Event space photo"
+                class="post-image"
+              />
+      
+              <div class="post-actions">
+                <button class="action-button">
+                  <img
+                    src="https://cdn.builder.io/api/v1/image/assets/0756144abf4c427a975cdf344d2f5a60/77d948e6ed1c36c104c28dfc9c6f8179ab87569cdca31c79bff3304011d8195b?placeholderIfAbsent=true"
+                    alt="Like"
+                  />
+                </button>
+                <button class="action-button">
+                  <img
+                    src="https://cdn.builder.io/api/v1/image/assets/0756144abf4c427a975cdf344d2f5a60/050f094e509457cfd74fe10531e39be2d8fe041a33e2c3079d4e26b4840450a1?placeholderIfAbsent=true"
+                    alt="Comment"
+                  />
+                </button>
+              </div>
+            </article>
+      
+            <div class="author-suggestion">
+              <img
+                src="https://cdn.builder.io/api/v1/image/assets/0756144abf4c427a975cdf344d2f5a60/cfb8f0f4a854a1c4428437da49f3bd8bb61c51137c0f1aae857c22f0fd9c7b5b?placeholderIfAbsent=true"
+                alt=""
+                class="suggestion-image"
+              />
+              <h3 class="suggestion-title">Espaço Lunar Mabor</h3>
+            </div>
+          </section>
+      
+          <aside class="notifications-panel">
+            <h2 class="panel-title">Notificações</h2>
+      
+            <section class="messages-section">
+              <header class="messages-header">
+                <div class="header-content">
+                  <div class="title-wrapper">
+                    <h3 class="messages-title">Messages</h3>
+                    <img
+                      src="https://cdn.builder.io/api/v1/image/assets/0756144abf4c427a975cdf344d2f5a60/86c6bfebcbd669ca616e58816f350a765fa9f8bd714032e11f4777b448b41563?placeholderIfAbsent=true"
+                      alt=""
+                      class="dropdown-icon"
+                    />
+                    <span class="message-count">12</span>
+                  </div>
+                  <button class="compose-button">
+                    <img
+                      src="https://cdn.builder.io/api/v1/image/assets/0756144abf4c427a975cdf344d2f5a60/67067fac59ae98ecb4870a39cb9a927672d678aa0899d51534e53594227b314b?placeholderIfAbsent=true"
+                      alt="Compose message"
+                    />
+                  </button>
+                </div>
+              </header>
+      
+              <div class="search-messages">
+                <img
+                  src="https://cdn.builder.io/api/v1/image/assets/0756144abf4c427a975cdf344d2f5a60/a3b048cbfe8227da1450e35182ed811a2aa4257d4e1b3a1402e5528a76418c27?placeholderIfAbsent=true"
+                  alt=""
+                  class="search-icon"
+                />
+                <input
+                  type="search"
+                  placeholder="Pesquisar Mensagens"
+                  aria-label="Search messages"
+                />
+              </div>
+      
+              <ul class="message-list">
+                <li class="message-item">
+                  <img
+                    src="https://cdn.builder.io/api/v1/image/assets/0756144abf4c427a975cdf344d2f5a60/c6020cec6a81a2756a630763e9fcad98478fc336a44fbd0763e4544122d02cdd?placeholderIfAbsent=true"
+                    alt=""
+                    class="sender-image"
+                  />
+                  <div class="message-content">
+                    <div class="message-info">
+                      <div class="sender-details">
+                        <h4 class="sender-name">Clube S</h4>
+                        <span class="message-time">12m</span>
+                      </div>
+                      <p class="message-preview">Você: Obrigado, estou esperando!</p>
+                    </div>
+                    <span class="status-badge status-pending">Em Andamento</span>
+                  </div>
+                </li>
+      
+                <li class="message-item">
+                  <img
+                    src="https://cdn.builder.io/api/v1/image/assets/0756144abf4c427a975cdf344d2f5a60/d0d30068759a6b3c844833cb7b43eb0407faace4dfbdfc01cc57bd02010a2c27?placeholderIfAbsent=true"
+                    alt=""
+                    class="sender-image"
+                  />
+                  <div class="message-content">
+                    <div class="message-info">
+                      <div class="sender-details">
+                        <h4 class="sender-name">Espaço Lunar Mabor</h4>
+                        <span class="message-time">1h</span>
+                      </div>
+                      <p class="message-preview">Muito Obrigado, Caríssimo!</p>
+                    </div>
+                    <span class="status-badge status-completed">Negociado</span>
+                  </div>
+                </li>
+              </ul>
+            </section>
+          </aside>
+        </div>
+      </main>
+      
+    
+</body>
+</html>

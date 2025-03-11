@@ -1,6 +1,5 @@
-// 📌 Importações Firebase
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
-import { getAuth, onAuthStateChanged, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js";
 
 // 🔥 Configuração do Firebase
 const firebaseConfig = {
@@ -25,8 +24,8 @@ toast.innerHTML = `
           <i class="fa-solid fa-check"></i>
       </div>
       <div class="message">
-          <span class="text text-1">Sucesso!</span>
-          <span class="text text-2">Operação realizada com sucesso.</span>
+          <span class="text text-1">Aviso!</span>
+          <span class="text text-2">Sessão expirada. Faça login novamente.</span>
       </div>
       <i class="fa-solid fa-xmark close"></i>
   </div>
@@ -56,10 +55,6 @@ function showToast(type, title, message) {
     toast.style.borderLeft = "6px solid #F39C12";
     icon.className = "fa-solid fa-exclamation-triangle";
     icon.style.backgroundColor = "#F39C12";
-  } else if (type === "info") {
-    toast.style.borderLeft = "6px solid #3498DB";
-    icon.className = "fa-solid fa-spinner fa-spin";
-    icon.style.backgroundColor = "#3498DB";
   }
 
   text1.textContent = title;
@@ -87,46 +82,19 @@ function showToast(type, title, message) {
   });
 }
 
-// 🔐 Sistema de Login com Firebase Authentication
-document.addEventListener("DOMContentLoaded", function () {
-  const loginButton = document.getElementById("submitSignUp");
+// 🔄 Verificar se o usuário está logado
+onAuthStateChanged(auth, (user) => {
+  if (!user) {
+    showToast("warning", "Sessão Expirada", "Você precisa estar logado para acessar esta página.");
+    console.warn("🔒 Usuário não autenticado! Redirecionando...");
 
-  if (!loginButton) {
-    console.error("Erro: O botão de login não foi encontrado.");
-    return;
+    // ⏳ Pequeno atraso para exibir o toast antes do redirecionamento
+    setTimeout(() => {
+      window.location.replace("loginpage.html");
+    }, 2500);
+  } else {
+    console.log(`✅ Usuário autenticado: ${user.email}`);
   }
-
-  loginButton.addEventListener("click", function (event) {
-    event.preventDefault();
-
-    // 📝 Obter os valores do formulário
-    const email = document.getElementById("rEmail").value.trim();
-    const password = document.getElementById("rPassword").value;
-
-    // ✅ Validação inicial
-    if (!email || !password) {
-      showToast("warning", "Atenção!", "Preencha todos os campos.");
-      return;
-    }
-
-    // 🔄 Exibir toast de carregamento
-    showToast("info", "Aguarde...", "Verificando credenciais...");
-
-    // 🔐 Fazer login com Firebase
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        showToast("success", "Login realizado!", "Redirecionando...");
-
-        setTimeout(() => {
-          window.location.href = `dashboard.html?user=${user.email}`;
-        }, 2000);
-      })
-      .catch((error) => {
-        showToast("error", "Erro no Login!", error.message);
-        console.error("Erro:", error);
-      });
-  });
 });
 
 // 📌 Adicionar estilos ao documento
@@ -174,6 +142,7 @@ style.innerHTML = `
     justify-content: center;
     height: 35px;
     width: 35px;
+    background-color: #4070f4;
     color: #fff;
     font-size: 20px;
     border-radius: 50%;
@@ -216,6 +185,16 @@ style.innerHTML = `
     height: 3px;
     width: 100%;
     background: #ddd;
+  }
+  
+  .progress:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #4070f4;
   }
   
   .progress.active:before {
