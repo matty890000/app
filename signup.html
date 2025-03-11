@@ -1,11 +1,18 @@
 <!DOCTYPE html>
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Registrar-se</title>
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="./src/css/signup.css">
+  
+  <!-- EmailJS -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 <body>
-  <link rel="stylesheet" href="./src/css/signup.css">
+
 <main class="signup-container">
   <section class="signup-left">
     <header class="signup-header">
@@ -15,65 +22,34 @@
     <div class="signup-content">
       <div class="signup-text">
         <h2 class="signup-title">Inscrever-se</h2>
-        <p class="signup-description">
-          Inscreva-se para Encontrar o seu Espaço Favorito.
-        </p>
+        <p class="signup-description">Inscreva-se para Encontrar o seu Espaço Favorito.</p>
       </div>
 
-      <form class="signup-form" action="#" method="POST">
+      <form id="signup-form" class="signup-form">
+        <!-- Nome Completo -->
         <div class="form-field">
-          <input
-            type="text"
-            id="fName"
-            class="form-input"
-            placeholder="Seu Nome Completo"
-            required
-          />
+          <input type="text" id="fName" class="form-input" placeholder="Seu Nome Completo" required />
           <label for="fName" class="form-label">Seu Nome</label>
         </div>
 
-        
-
-        <div class="form-field form-field--active">
-          <input
-            type="email"
-            id="rEmail"
-            class="form-input"
-            placeholder="Digite seu E-mail"
-            required
-          />
+        <!-- E-mail -->
+        <div class="form-field">
+          <input type="email" id="rEmail" class="form-input" placeholder="Digite seu E-mail" required />
           <label for="rEmail" class="form-label">E-mail</label>
         </div>
 
+        <!-- Senha -->
         <div class="form-field">
-          <input
-            type="password"
-            id="rPassword"
-            class="form-input"
-            placeholder="Crie uma Senha segura"
-            required
-          />
-          <img
-            src="https://cdn.builder.io/api/v1/image/assets/0756144abf4c427a975cdf344d2f5a60/cd1cad0a34bb73c9871105ec9d3be3a1accd83d0ca482c7dbb9e289f17163bb0?placeholderIfAbsent=true"
-            alt="Show password"
-            class="form-icon"
-          />
+          <input type="password" id="rPassword" class="form-input" placeholder="Crie uma Senha segura" required />
           <label for="rPassword" class="form-label">Senha</label>
         </div>
 
+        <!-- Mensagem de erro -->
+        <p id="error-message" class="error-message" style="color: red; display: none;"></p>
+
+        <!-- Botão de envio -->
         <button type="submit" id="submitSignUp" class="button button--primary">
           Criar conta
-        </button>
-
-        <div class="divider">
-          <hr class="divider-line" />
-          <span class="divider-text">ou</span>
-          <hr class="divider-line" />
-        </div>
-
-        <button type="button" class="button button--google">
-          <span>Continuar com o Google</span> <img src="src/img/Group.svg" alt="">
-          <div class="google-icon"></div>
         </button>
 
         <p class="login-link">
@@ -84,15 +60,80 @@
   </section>
 
   <section class="signup-right">
-    <img
-      src="https://cdn.builder.io/api/v1/image/assets/0756144abf4c427a975cdf344d2f5a60/f48c1dc9fc56df11f012a9b8e5851e0ca32119c114457b270c7463d6832383cc?placeholderIfAbsent=true"
-      alt="Sign up background"
-      class="background-image"
-    />
+    <img src="https://cdn.builder.io/api/v1/image/assets/0756144abf4c427a975cdf344d2f5a60/f48c1dc9fc56df11f012a9b8e5851e0ca32119c114457b270c7463d6832383cc?placeholderIfAbsent=true"
+      alt="Sign up background" class="background-image">
   </section>
 </main>
+
+<!-- Scripts -->
 <script type="module" src="./src/js/auth.js"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    emailjs.init("fRx2LNlIm1UXbA2CW"); // Substitua pelo seu User ID do EmailJS
+
+    const form = document.getElementById("signup-form");
+    const btn = document.getElementById("submitSignUp");
+    const errorMessage = document.getElementById("error-message");
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault(); // Evita recarregar a página
+
+      const userName = document.getElementById("fName").value.trim();
+      const userEmail = document.getElementById("rEmail").value.trim();
+
+      // 1️⃣ Validar se os campos estão preenchidos
+      if (!userName || !userEmail) {
+        showError("Por favor, preencha todos os campos.");
+        return;
+      }
+
+      // 2️⃣ Validar o formato do e-mail
+      if (!validateEmail(userEmail)) {
+        showError("Por favor, insira um e-mail válido.");
+        return;
+      }
+
+      // 3️⃣ Desativar botão enquanto envia
+      btn.textContent = "Enviando...";
+      btn.disabled = true;
+      errorMessage.style.display = "none";
+
+      // 4️⃣ Parâmetros do EmailJS
+      const emailParams = {
+        to_name: userName,
+        to: userEmail
+      };
+
+      // 5️⃣ Enviar via EmailJS
+      emailjs.send("default_service", "template_g0l1706", emailParams)
+        .then(() => {
+          alert("E-mail enviado com sucesso! Confira sua caixa de entrada.");
+          form.reset();
+        })
+        .catch((err) => {
+          showError("Erro ao enviar e-mail. Tente novamente mais tarde.");
+          console.error("Erro do EmailJS:", err);
+        })
+        .finally(() => {
+          btn.textContent = "Criar conta";
+          btn.disabled = false;
+        });
+    });
+
+    // Função para validar e-mail
+    function validateEmail(email) {
+      const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      return emailPattern.test(email);
+    }
+
+    // Função para exibir erros
+    function showError(message) {
+      errorMessage.textContent = message;
+      errorMessage.style.display = "block";
+    }
+  });
+</script>
+
 </body>
 </html>
-
-
